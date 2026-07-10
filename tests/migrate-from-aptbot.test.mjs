@@ -9,7 +9,7 @@ import {
   convertFrontmatter,
   rewriteImagePaths,
   migrateAll,
-} from '../scripts/migrate-from-aptbot.mjs';
+} from '../tools/migrate-from-aptbot.mjs';
 
 const tempDirs = [];
 

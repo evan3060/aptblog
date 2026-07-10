@@ -61,6 +61,26 @@ export function matchImageToSlug(imageBaseName, slugs) {
   return slugs.find((slug) => slug.includes(stem) || stem.includes(slug)) || null;
 }
 
+// Build a map from image filename (e.g. "react-loop.png") to the slug of the
+// article that references it, by scanning article content for image refs.
+// This is more accurate than filename-based matching: e.g. agent-architecture.png
+// is referenced by 01-what-is-agent, but the names share no substring.
+export function buildImageRefMap(articleContents) {
+  // articleContents: array of { slug, content }
+  const map = new Map();
+  const refRegex = /\/learn\/articles\/images\/([a-zA-Z0-9_-]+\.png)/g;
+  for (const { slug, content } of articleContents) {
+    let match;
+    while ((match = refRegex.exec(content)) !== null) {
+      const imgName = match[1];
+      if (!map.has(imgName)) {
+        map.set(imgName, slug);
+      }
+    }
+  }
+  return map;
+}
+
 export async function migrateAll({ sourceDir, targetSourceDir, dryRun = false }) {
   await access(sourceDir);
 
@@ -77,7 +97,7 @@ export async function migrateAll({ sourceDir, targetSourceDir, dryRun = false })
 
   let processed = 0;
   let skipped = 0;
-  const articles = [];
+  const articleContents = [];
 
   for (const file of mdFiles) {
     const filePath = path.join(sourceDir, file.name);
@@ -89,7 +109,7 @@ export async function migrateAll({ sourceDir, targetSourceDir, dryRun = false })
       const output = matter.stringify(rewritten, targetFm);
       const outDir = getOutputDir(article.lang, article.data.status);
       const outPath = path.join(targetSourceDir, outDir, `${article.slug}.md`);
-      articles.push(article.slug);
+      articleContents.push({ slug: article.slug, content: article.content });
       if (dryRun) {
         console.log(`[dry-run] would write ${path.relative(targetSourceDir, outPath)}`);
       } else {
@@ -107,10 +127,15 @@ export async function migrateAll({ sourceDir, targetSourceDir, dryRun = false })
   try {
     await access(imagesDir);
     const imgFiles = (await readdir(imagesDir)).filter((f) => f.endsWith('.png'));
-    const slugs = [...new Set(articles)];
+    // Build image->slug map from actual article references (more accurate than
+    // filename matching). Falls back to filename matching for unreferenced imgs.
+    const refMap = buildImageRefMap(articleContents);
     for (const img of imgFiles) {
-      const base = img.replace(/\.png$/, '');
-      const matched = matchImageToSlug(base, slugs);
+      // For gpt variants (xxx-gpt.png), the article references the base (xxx.png).
+      // Strip -gpt suffix to look up the referenced slug, so gpt variants land
+      // in the same slug directory as their human-authored counterpart.
+      const lookupName = img.replace(/-gpt\.png$/, '.png');
+      const matched = refMap.get(img) || refMap.get(lookupName) || matchImageToSlug(img.replace(/\.png$/, ''), articleContents.map((a) => a.slug));
       const destSub = matched ? path.join('images', matched) : path.join('images', 'misc');
       const destPath = path.join(targetSourceDir, destSub, img);
       if (dryRun) {
