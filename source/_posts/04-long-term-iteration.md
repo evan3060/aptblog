@@ -15,8 +15,7 @@ categories:
 difficulty: advanced
 reading_time: 18
 prerequisites: []
-lang: zh
-permalink: zh/04-long-term-iteration.html
+lang: zh-CN
 ---
 
 如果你尝试过用 AI 辅助开发一个真实项目，很可能经历过这样的轨迹：第一个版本，你让 AI 一口气搭好了原型，代码跑起来了，你觉得"AI 太强了，开发效率至少翻了五倍"；第二个版本，你让 AI 加新功能，虽然开始遇到一些"改 A 崩 B"的情况，但整体还能推进；到了第三个版本，你发现代码已经彻底不可维护了——改一行要动五个文件、加一个字段引入了三个 bug、AI 每次新会话都建议"不如重写吧"。

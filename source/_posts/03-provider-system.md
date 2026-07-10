@@ -17,8 +17,7 @@ difficulty: intermediate
 reading_time: 22
 prerequisites:
   - 02-aptbot-architecture
-lang: zh
-permalink: zh/03-provider-system.html
+lang: zh-CN
 ---
 
 在上一篇架构文章中，我们知道 Provider 是 core 层的关键组件之一——它是 agent 与 LLM 服务之间的桥梁。但这座桥梁不是一根直通的管道，而是一套包含协议适配、流式控制、错误分类、故障转移的完整系统。

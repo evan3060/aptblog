@@ -17,8 +17,7 @@ difficulty: advanced
 reading_time: 18
 prerequisites:
   - 10-security-model
-lang: zh
-permalink: zh/11-error-streaming-ux.html
+lang: zh-CN
 ---
 
 Agent 系统的"可靠性"和"UX"看似两个话题，在 aptbot 里其实是同一个——都是关于"事件如何从 agent 流到用户、出错时如何处理"。这篇文章把这两条线索拧在一起，看 aptbot 的错误处理哲学、事件流抽象、UI 渲染模式如何协作。

@@ -16,8 +16,7 @@ categories:
 difficulty: advanced
 reading_time: 20
 prerequisites: []
-lang: zh
-permalink: zh/13-agent-future-roadmap.html
+lang: zh-CN
 ---
 
 这是 Track 1 的最后一篇。前面 12 篇文章把 aptbot 的架构、Provider、Tool、Memory、Skills、Hook、Channel、Session、安全、错误处理、演进回顾都讲了一遍——这些是"已有的设计"。这篇讲未来——从 0.2.3 出发，看 L2/L3 路线、多 modal、MCP、自演化 skill、浏览器与系统控制、空闲自主行动的远期展望。最后回到 aptbot 的核心理念"项目即学习"，并为整个 Track 1 做一个结语。

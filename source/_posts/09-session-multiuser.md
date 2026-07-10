@@ -17,8 +17,7 @@ difficulty: intermediate
 reading_time: 18
 prerequisites:
   - 08-channel-transport
-lang: zh
-permalink: zh/09-session-multiuser.html
+lang: zh-CN
 ---
 
 上一篇文章讲了 Channel——多端接入的抽象。Channel 解决的是"事件怎么传"的问题，但没解决"状态怎么管"的问题。

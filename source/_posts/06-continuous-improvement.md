@@ -14,8 +14,7 @@ difficulty: intermediate
 reading_time: 18
 prerequisites:
   - 05-boundary-issues
-lang: zh
-permalink: zh/06-continuous-improvement.html
+lang: zh-CN
 ---
 
 前五篇文章分别讨论了流程、质量、文档、长期迭代维护、边界问题。本篇是 Track 2 的收束——回到方法论本身。AI 辅助开发不是一项静态技能，它随模型升级、工具演进、项目累积在持续变化。今天用得顺的工作流，半年后可能就因为模型行为改变而过时。这篇文章讨论的不是"一套规则"，而是一套**让规则持续进化**的方法论：如何与 AI 建立有效协作、如何从 AI 输出中学习、如何沉淀知识、如何评估输出、如何持续优化流程，以及如何避免过度依赖。

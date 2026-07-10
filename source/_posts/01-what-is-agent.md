@@ -15,8 +15,7 @@ categories:
 difficulty: beginner
 reading_time: 18
 prerequisites: []
-lang: zh
-permalink: zh/01-what-is-agent.html
+lang: zh-CN
 ---
 
 如果你刚接触"agent"这个词，可能会困惑：它和 ChatGPT 这种聊天机器人有什么不同？为什么大家都在谈 agent？aptbot 又是什么？这篇文章会从零开始，把"agent 到底是什么"讲透，并对比市面几种主流 agent 的设计思路，最后落到 aptbot 的选择上。

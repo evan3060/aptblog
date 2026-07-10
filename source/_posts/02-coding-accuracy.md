@@ -16,8 +16,7 @@ categories:
 difficulty: beginner
 reading_time: 18
 prerequisites: []
-lang: zh
-permalink: zh/02-coding-accuracy.html
+lang: zh-CN
 ---
 
 AI 写的代码有一个极具欺骗性的特点：它**看起来对**。命名合理、结构整齐、注释齐全，甚至比大多数人类开发者的代码还要"干净"。但运行起来才发现——引用了不存在的 API、漏掉了边界条件、在未测试的路径里埋了 bug。这不是 AI 故意使坏，而是大语言模型的本质决定的：它生成的代码基于概率分布，不是基于执行验证。要让 AI 写的代码从"能跑"提升到"可信"，需要一套相互嵌套的质量防线。
