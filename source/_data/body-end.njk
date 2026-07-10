@@ -1,0 +1,54 @@
+<script>
+(function() {
+  // Move language switcher button into the main menu
+  var source = document.getElementById('lang-switcher-source');
+  var menu = document.querySelector('.main-menu');
+  if (source && menu) {
+    var li = source.querySelector('li');
+    if (li) menu.appendChild(li);
+    if (source.parentNode) source.parentNode.removeChild(source);
+  }
+
+  // Rewrite menu links based on current language
+  var lang = document.documentElement.lang;
+  var prefix = lang === 'en' ? '/en' : '';
+  var menuLinks = document.querySelectorAll('.main-menu .menu-item a:not(.nav-lang)');
+  menuLinks.forEach(function(link) {
+    var href = link.getAttribute('href');
+    if (href && href.charAt(0) === '/' && href.indexOf('/en') !== 0) {
+      link.setAttribute('href', prefix + href);
+    }
+  });
+
+  // Language switcher click handler
+  var switcher = document.getElementById('lang-switcher');
+  if (switcher) {
+    switcher.addEventListener('click', function(e) {
+      e.preventDefault();
+      var currentLang = document.documentElement.lang;
+      var path = window.location.pathname;
+      var targetUrl;
+      if (currentLang === 'zh-CN') {
+        targetUrl = '/en' + (path === '/' ? '/' : path);
+      } else {
+        targetUrl = path.replace(/^\/en/, '') || '/';
+      }
+      try { localStorage.setItem('aptblog.lang', currentLang === 'zh-CN' ? 'en' : 'zh-CN'); } catch(err) {}
+      window.location.href = targetUrl;
+    });
+  }
+
+  // First-visit language detection (only when localStorage not set)
+  var stored;
+  try { stored = localStorage.getItem('aptblog.lang'); } catch(err) {}
+  if (!stored) {
+    var navLang = navigator.language || navigator.userLanguage || '';
+    var currentLang = document.documentElement.lang;
+    if (navLang.indexOf('zh') !== 0 && currentLang !== 'en') {
+      var path = window.location.pathname;
+      window.location.href = '/en' + (path === '/' ? '/' : path);
+    }
+    try { localStorage.setItem('aptblog.lang', currentLang); } catch(err) {}
+  }
+})();
+</script>
