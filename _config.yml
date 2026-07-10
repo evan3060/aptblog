@@ -104,3 +104,29 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+# SEO & Site Plugins
+## hexo-generator-sitemap
+sitemap:
+  path: sitemap.xml
+  rel: false
+  tags: true
+  categories: true
+
+## hexo-generator-feed
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+  content: true
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+
+## hexo-generator-searchdb
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html

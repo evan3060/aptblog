@@ -1,0 +1,238 @@
+# ===============================================================
+# NexT Theme Alternate Configuration
+# Docs: https://theme-next.js.org/docs/getting-started/configuration
+# ===============================================================
+
+# ---------------------------------------------------------------
+# Theme Core
+# ---------------------------------------------------------------
+cache:
+  enable: true
+minify: false
+
+# ---------------------------------------------------------------
+# Scheme Settings
+# ---------------------------------------------------------------
+# Gemini: clean, modern, two-column layout
+scheme: Gemini
+# Dark mode toggle (follows user system preference)
+darkmode: true
+
+# ---------------------------------------------------------------
+# Site Information
+# ---------------------------------------------------------------
+favicon:
+  small: /images/favicon-16x16-next.png
+  medium: /images/favicon-32x32-next.png
+  apple_touch_icon: /images/apple-touch-icon-next.png
+  safari_pinned_tab: /images/logo.svg
+
+# Avatar (leave empty to use theme default)
+avatar:
+  url: #/images/avatar.gif
+  rounded: false
+  rotated: false
+
+# ---------------------------------------------------------------
+# Menu Settings
+# ---------------------------------------------------------------
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  categories: /categories/ || fa fa-th
+  tags: /tags/ || fa fa-tags
+  about: /about/ || fa fa-user
+
+menu_settings:
+  icons: true
+  badges: false
+
+# ---------------------------------------------------------------
+# Sidebar Settings
+# ---------------------------------------------------------------
+sidebar:
+  # Sidebar position.
+  position: left
+  # Sidebar display: post = expand on posts automatically (post_expand).
+  display: post
+  padding: 18
+  offset: 12
+
+# Posts / Categories / Tags in sidebar.
+site_state: true
+
+# Table of Contents in the Sidebar
+toc:
+  enable: true
+  number: true
+  wrap: false
+  # Auto expand all levels of TOC.
+  expand_all: true
+  # Maximum heading depth of generated toc.
+  max_depth: 4
+
+# ---------------------------------------------------------------
+# Footer Settings
+# ---------------------------------------------------------------
+footer:
+  powered: true
+  # Beian ICP for Chinese sites (left disabled; fill in if required).
+  beian:
+    enable: false
+
+# ---------------------------------------------------------------
+# Post Settings
+# ---------------------------------------------------------------
+excerpt_description: true
+read_more_btn: true
+
+post_meta:
+  item_text: true
+  created_at: true
+  updated_at:
+    enable: true
+    another_day: true
+  categories: true
+
+# ---------------------------------------------------------------
+# Misc Theme Settings
+# ---------------------------------------------------------------
+# Code highlight
+codeblock:
+  theme:
+    light: default
+    dark: stackoverflow-dark
+  copy_button:
+    enable: true
+    style: default
+  fold:
+    enable: false
+    height: 500
+  language: false
+
+# Back to top
+back2top:
+  enable: true
+  sidebar: false
+  scrollpercent: false
+
+# Reading progress bar
+reading_progress:
+  enable: true
+  start_at: left
+  position: top
+  reversed: false
+  color: "#37c6c0"
+  height: 3px
+
+# ---------------------------------------------------------------
+# Font Settings
+# IMPORTANT: Keep `enable: false` to avoid referencing Google Fonts
+# (fonts.googleapis.com), which is blocked by the GFW in China.
+# ---------------------------------------------------------------
+font:
+  enable: false
+  host:
+  global:
+    external: true
+    family: Lato
+    size:
+  title:
+    external: true
+    family:
+  headings:
+    external: true
+    family:
+  posts:
+    external: true
+    family:
+  codes:
+    external: true
+    family:
+
+# ---------------------------------------------------------------
+# SEO Settings
+# ---------------------------------------------------------------
+index_with_subtitle: false
+exturl: false
+exturl_icon: true
+
+# ---------------------------------------------------------------
+# Animation Settings
+# ---------------------------------------------------------------
+# Uses Animate.css (loaded via CDN, see vendors section).
+motion:
+  enable: true
+  async: false
+  duration: 200
+  transition:
+    menu_item: fadeInDown
+    post_block: fadeIn
+    post_header: fadeInDown
+    post_body: fadeInDown
+    coll_header: fadeInLeft
+    sidebar: fadeInUp
+
+# ---------------------------------------------------------------
+# Comments Settings
+# ---------------------------------------------------------------
+# Giscus comments: DISABLED for now.
+# Giscus is NOT natively supported by hexo-theme-next 8.x. To enable
+# GitHub Discussions-based comments later, choose ONE of:
+#   1. Use the built-in `utterances` block below (closest equivalent,
+#      also GitHub Issues based), or
+#   2. Add a Giscus widget via `custom_file_path.bodyEnd` pointing to a
+#      custom njk partial that loads the giscus script.
+# Required setup before enabling: create a public GitHub repo, install
+# the giscus app, and enable Discussions + a category. Then fill in:
+#   giscus:
+#     repo: your-name/your-repo
+#     repo_id: <giscus repo id>
+#     category: Announcements
+#     category_id: <giscus category id>
+#     mapping: pathname
+#     theme: light
+#     input_position: top
+#     lang: zh-CN
+comments:
+  style: tabs
+  active:
+  storage: true
+  lazyload: false
+  nav:
+
+# Utterances (GitHub issue-based comments, built-in alternative to giscus).
+# Enable here after creating the repo if you prefer utterances over giscus.
+utterances:
+  enable: false
+  repo: user-name/repo-name
+  issue_term: pathname
+  theme: github-light
+
+# ---------------------------------------------------------------
+# Search Services
+# ---------------------------------------------------------------
+# Local search uses hexo-generator-searchdb output (search.xml).
+local_search:
+  enable: true
+  top_n_per_article: 1
+  unescape: false
+  preload: false
+
+# ---------------------------------------------------------------
+# CDN Settings
+# ---------------------------------------------------------------
+# NOTE: `plugins: cdnjs` loads Font Awesome, Animate.css and other
+# third-party libraries from cdnjs.cloudflare.com. This CDN may be slow
+# or unreliable from mainland China. If UAT shows resource loading
+# failures, switch `plugins` to `jsdelivr` (generally more accessible)
+# or to `local` (requires https://github.com/next-theme/plugins).
+# Left as `cdnjs` for now pending China UAT.
+vendors:
+  internal: local
+  plugins: cdnjs
+  custom_cdn_url:
+
+css: css
+js: js
+images: images
