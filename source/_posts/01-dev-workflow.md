@@ -2,13 +2,13 @@
 title: AI 辅助开发工作流：用流程约束驯服不确定性
 description: 四阶段流程、文档分层、双重审核、熔断机制、看板管理与 TDD 红绿循环如何让 AI 输出从不可预测变为可控可追溯
 tags:
-  - workflow
-  - tdd
-  - constraints
-  - methodology
+  - 工作流
+  - TDD
+  - 约束
+  - 方法论
 date: '2026-07-02'
 categories:
-  - ai-coding-practice
+  - AI编程实践
   - 方法论
 difficulty: beginner
 reading_time: 18

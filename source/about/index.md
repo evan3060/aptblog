@@ -3,6 +3,8 @@ title: 关于
 date: 2026-07-10
 lang: zh-CN
 permalink: about/index.html
+toc:
+  enable: false
 ---
 
 ## 关于 aptblog

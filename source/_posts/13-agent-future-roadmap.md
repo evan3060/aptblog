@@ -5,13 +5,13 @@ description: >-
   session 记忆/AgentHarness/subagent、多 modal、MCP 工具扩展、自演化
   skill、浏览器/系统控制展望、项目即学习核心理念、Track 1 结语
 tags:
-  - roadmap
-  - future
-  - mcp
-  - autonomous
+  - 路线图
+  - 未来
+  - MCP
+  - 自主
 date: '2026-07-01'
 categories:
-  - agent-practice
+  - Agent实践
   - 演进路线篇
 difficulty: advanced
 reading_time: 20

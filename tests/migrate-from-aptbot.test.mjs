@@ -118,9 +118,9 @@ describe('convertFrontmatter', () => {
 
     expect(out.title).toBe(source.title);
     expect(out.description).toBe(source.description);
-    expect(out.tags).toEqual(source.tags);
+    expect(out.tags).toEqual(['工作流', 'TDD']);
     expect(out.date).toBe('2026-07-02');
-    expect(out.categories).toEqual(['ai-coding-practice', '方法论']);
+    expect(out.categories).toEqual(['AI编程实践', '方法论']);
     expect(out.difficulty).toBe('beginner');
     expect(out.reading_time).toBe(18);
     expect(out.prerequisites).toEqual([]);

@@ -4,14 +4,14 @@ description: >-
   Api 与 Provider 分离的设计动机、三种 API 协议、双时钟流式控制、错误分类重试与退避、MixinProvider
   故障转移与弹回机制，以及三种 provider 管理方案对比
 tags:
-  - provider
-  - streaming
-  - retry
-  - failover
-  - llm
+  - Provider
+  - 流式传输
+  - 重试
+  - 故障转移
+  - LLM
 date: '2026-07-02'
 categories:
-  - agent-practice
+  - Agent实践
   - 核心特性深入篇
 difficulty: intermediate
 reading_time: 22

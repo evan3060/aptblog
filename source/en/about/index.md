@@ -3,6 +3,8 @@ title: About
 date: 2026-07-10
 lang: en
 permalink: en/about/index.html
+toc:
+  enable: false
 ---
 
 ## About aptblog

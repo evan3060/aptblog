@@ -2,13 +2,13 @@
 title: 边界与问题：能力边界、何时人工介入、踩坑案例
 description: AI 擅长与不擅长的领域划分、必须人工介入的四个场景、五个典型踩坑案例（跳测试、plan 写代码、重复失败、误读意图、过度工程化）、约束即自由的协作哲学
 tags:
-  - boundary
-  - pitfalls
-  - human-in-loop
-  - methodology
+  - 边界
+  - 陷阱
+  - 人工介入
+  - 方法论
 date: '2026-07-02'
 categories:
-  - ai-coding-practice
+  - AI编程实践
   - 方法论
 difficulty: intermediate
 reading_time: 18

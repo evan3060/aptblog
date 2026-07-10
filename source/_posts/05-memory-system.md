@@ -4,13 +4,13 @@ description: >-
   理解 agent 记忆系统的核心矛盾，JSONL append-only 持久化设计、增量流式解析与破损容错、Compaction
   压缩策略、跨会话记忆继承，以及三种持久化方案的对比取舍
 tags:
-  - memory
-  - jsonl
-  - compaction
-  - persistence
+  - 记忆
+  - JSONL
+  - 压缩
+  - 持久化
 date: '2026-07-02'
 categories:
-  - agent-practice
+  - Agent实践
   - 核心特性深入篇
 difficulty: intermediate
 reading_time: 16

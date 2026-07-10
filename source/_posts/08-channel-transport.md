@@ -4,14 +4,14 @@ description: >-
   从多端接入的问题出发，对比三种接入方案的设计取舍，深入 aptbot 的类型化事件总线、最小化 Channel 接口、bindSession
   多对一共享、dead-channel 自动清理与 WebSocket 实现
 tags:
-  - channel
-  - transport
-  - websocket
-  - multi-client
-  - event-bus
+  - 通道
+  - 传输
+  - WebSocket
+  - 多客户端
+  - 事件总线
 date: '2026-07-02'
 categories:
-  - agent-practice
+  - Agent实践
   - 核心特性深入篇
 difficulty: intermediate
 reading_time: 16

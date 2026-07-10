@@ -4,13 +4,13 @@ description: >-
   理解 tool 在 agent 中的核心定位，AgentTool 接口与声明式注册、4 个内置工具的设计哲学、TypeBox
   参数校验、多层安全防线，以及市面三种工具管理方案的对比
 tags:
-  - tool
-  - security
-  - registry
-  - schema-validation
+  - 工具
+  - 安全
+  - 注册表
+  - Schema校验
 date: '2026-07-02'
 categories:
-  - agent-practice
+  - Agent实践
   - 核心特性深入篇
 difficulty: intermediate
 reading_time: 15

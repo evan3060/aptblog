@@ -8,10 +8,3 @@
     </div>
   </li>
 </div>
-
-{# Hide sidebar on about pages for cleaner layout #}
-{% if page.path and page.path.indexOf('about') !== -1 %}
-<style>
-  .sidebar { display: none !important; }
-</style>
-{% endif %}

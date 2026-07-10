@@ -4,13 +4,13 @@ description: >-
   四层架构（access/bus/core/infrastructure）+ shared 的设计动机，严格单向依赖为何重要，三种 agent
   架构路线对比，以及「你的 agent」的设计哲学
 tags:
-  - architecture
-  - layered-design
+  - 架构
+  - 分层设计
   - aptbot
-  - dependency-injection
+  - 依赖注入
 date: '2026-07-02'
 categories:
-  - agent-practice
+  - Agent实践
   - 入门篇
 difficulty: beginner
 reading_time: 20

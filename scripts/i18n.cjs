@@ -159,10 +159,12 @@ if (typeof hexo !== 'undefined') {
   hexo.extend.filter.register('template_locals', function(locals) {
     const isEn = locals.page && locals.page.lang === 'en';
     locals.menu_prefix = isEn ? '/en' : '';
-    // Override description for English pages (theme falls back to config.description which is Chinese)
+    // Override site title, subtitle, and description for English pages
     if (isEn) {
       const enDesc = 'An independent tech blog extended from aptbot, documenting Agent practices and AI coding experiences';
       locals.description = enDesc;
+      locals.title = 'aptblog';
+      locals.subtitle = 'Ai Practice Blog';
       // Set page.description so open_graph() helper uses English instead of config.description
       if (locals.page && !locals.page.description) {
         locals.page.description = enDesc;

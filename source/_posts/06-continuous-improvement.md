@@ -2,13 +2,13 @@
 title: 方法与持续改进：协作、学习、知识沉淀
 description: 如何与 AI 建立有效协作、从 AI 输出中学习、建立知识库、三层评估输出质量、持续优化协作流程、避免过度依赖 AI、方案对比
 tags:
-  - collaboration
-  - learning
-  - knowledge
-  - methodology
+  - 协作
+  - 学习
+  - 知识
+  - 方法论
 date: '2026-07-02'
 categories:
-  - ai-coding-practice
+  - AI编程实践
   - 方法论
 difficulty: intermediate
 reading_time: 18

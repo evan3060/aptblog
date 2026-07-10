@@ -4,13 +4,13 @@ description: >-
   AI 辅助项目为何容易在第三个版本崩溃，L1/L2/L3 版本规划与迭代节奏，测试基线管理，加法而不减法的架构演进，design-notes 与
   project_memory 维护，重构时机与依赖升级策略
 tags:
-  - iteration
-  - architecture
-  - maintenance
-  - methodology
+  - 迭代
+  - 架构
+  - 维护
+  - 方法论
 date: '2026-07-02'
 categories:
-  - ai-coding-practice
+  - AI编程实践
   - 方法论
 difficulty: advanced
 reading_time: 18

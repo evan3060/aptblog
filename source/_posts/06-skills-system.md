@@ -4,13 +4,13 @@ description: >-
   理解 skill 在 agent 中的「知识层」定位，两层加载机制如何平衡内置与定制、最小 frontmatter 设计理念、L1 索引与 token
   预算截断、热重载联动，以及三种 skill 管理方案的对比
 tags:
-  - skills
-  - system-prompt
-  - hot-reload
-  - token-management
+  - Skills
+  - 系统提示
+  - 热重载
+  - Token管理
 date: '2026-07-02'
 categories:
-  - agent-practice
+  - Agent实践
   - 核心特性深入篇
 difficulty: intermediate
 reading_time: 15

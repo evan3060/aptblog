@@ -4,14 +4,14 @@ description: >-
   TDD 红线、Semantic Versioning 与 Keep a Changelog、UAT 核验清单、封仓收尾流程、E2E
   测试设计与测试基线维护——把 AI 写的代码从能跑提升到可信
 tags:
-  - tdd
-  - testing
-  - uat
-  - version-control
-  - quality
+  - TDD
+  - 测试
+  - UAT
+  - 版本控制
+  - 质量
 date: '2026-07-02'
 categories:
-  - ai-coding-practice
+  - AI编程实践
   - 方法论
 difficulty: beginner
 reading_time: 18

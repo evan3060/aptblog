@@ -4,14 +4,14 @@ description: >-
   从 session 管理的基本问题出发，对比三种持久化方案的设计取舍，深入 aptbot 的 JSONL + sidecar
   存储、权限控制、两级缓存、多端同步的最终一致性模型与多用户租户隔离
 tags:
-  - session
-  - multi-user
-  - persistence
-  - cache
-  - isolation
+  - 会话
+  - 多用户
+  - 持久化
+  - 缓存
+  - 隔离
 date: '2026-07-02'
 categories:
-  - agent-practice
+  - Agent实践
   - 核心特性深入篇
 difficulty: intermediate
 reading_time: 18

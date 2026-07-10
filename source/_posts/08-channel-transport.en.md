@@ -13,7 +13,7 @@ tags:
 date: '2026-07-02'
 categories:
   - agent-practice
-  - Core Features Deep Dive
+  - Deep Dive into Core Features
 difficulty: intermediate
 reading_time: 16
 prerequisites:

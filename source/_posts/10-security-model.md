@@ -4,13 +4,13 @@ description: >-
   信任边界划定、systemPrompt 行为约束、工具硬超时、双时钟流式控制、OOM 防护、路径遍历防护、JSONL 自修复、Cookie 安全、WS
   token 鉴权、session ownership 隔离、API key 管理、HTTP 安全头、三种安全设计路线对比
 tags:
-  - security
-  - trust-boundary
-  - defense-in-depth
-  - authentication
+  - 安全
+  - 信任边界
+  - 纵深防御
+  - 认证
 date: '2026-07-01'
 categories:
-  - agent-practice
+  - Agent实践
   - 核心特性深入篇
 difficulty: advanced
 reading_time: 18

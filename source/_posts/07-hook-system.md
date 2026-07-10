@@ -4,13 +4,13 @@ description: >-
   从 hook 模式的设计动机出发，对比三种 agent 扩展方案，深入 aptbot 的 8 个 hook
   点拓扑、同步链式执行模型、两层插件目录与无沙箱设计哲学
 tags:
-  - hook
-  - plugin
-  - extensibility
-  - architecture
+  - Hook
+  - 插件
+  - 可扩展性
+  - 架构
 date: '2026-07-02'
 categories:
-  - agent-practice
+  - Agent实践
   - 核心特性深入篇
 difficulty: intermediate
 reading_time: 15

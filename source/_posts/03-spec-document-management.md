@@ -4,13 +4,13 @@ description: >-
   spec 与 plan 与 design 的边界划分、文件组织规范、全生命周期管理（草稿→审核→生效→修订→归档）、self-review
   检查清单、代码同步原则、何时写何时不必写
 tags:
-  - spec
-  - documentation
-  - lifecycle
-  - design
+  - 规范
+  - 文档
+  - 生命周期
+  - 设计
 date: '2026-07-02'
 categories:
-  - ai-coding-practice
+  - AI编程实践
   - 方法论
 difficulty: beginner
 reading_time: 18

@@ -4,14 +4,14 @@ description: >-
   外置分层重试哲学、三层重试（传输/业务/语义）、错误不持久化、AgentEvent 联合类型、EventStream → UI reducer
   模式、流式渲染/回合中断/多端同步、resync 协议、turn_busy、SessionRef、三种错误处理路线对比
 tags:
-  - error-handling
-  - streaming
-  - event-stream
-  - reducer
-  - ux
+  - 错误处理
+  - 流式传输
+  - 事件流
+  - Reducer
+  - 用户体验
 date: '2026-07-01'
 categories:
-  - agent-practice
+  - Agent实践
   - 可靠性+UX 篇
 difficulty: advanced
 reading_time: 18

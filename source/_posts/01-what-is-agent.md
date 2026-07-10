@@ -4,13 +4,13 @@ description: >-
   理解 agent 的核心定义，chatbot/assistant/agent 三者的本质差异，ReAct 循环如何让 LLM
   从被动响应走向自主行动，以及市面主流 agent 方案的设计对比
 tags:
-  - agent
-  - fundamentals
-  - react-loop
-  - architecture
+  - Agent
+  - 基础概念
+  - React循环
+  - 架构
 date: '2026-07-01'
 categories:
-  - agent-practice
+  - Agent实践
   - 入门篇
 difficulty: beginner
 reading_time: 18

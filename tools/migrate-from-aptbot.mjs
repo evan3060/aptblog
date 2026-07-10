@@ -35,12 +35,104 @@ function formatDate(value) {
 }
 
 export function convertFrontmatter(data, lang) {
+  // Translate top-level category for Chinese articles
+  const CATEGORY_ZH_MAP = {
+    'agent-practice': 'Agent实践',
+    'ai-coding-practice': 'AI编程实践',
+  };
+  // Standardize inconsistent English sub-category names
+  const EN_SUBCATEGORY_FIX = {
+    'Core Features Deep Dive': 'Deep Dive into Core Features',
+  };
+  // Translate tags to Chinese for Chinese articles
+  const TAG_ZH_MAP = {
+    'workflow': '工作流',
+    'tdd': 'TDD',
+    'constraints': '约束',
+    'methodology': '方法论',
+    'agent': 'Agent',
+    'fundamentals': '基础概念',
+    'react-loop': 'React循环',
+    'architecture': '架构',
+    'layered-design': '分层设计',
+    'aptbot': 'aptbot',
+    'dependency-injection': '依赖注入',
+    'testing': '测试',
+    'uat': 'UAT',
+    'version-control': '版本控制',
+    'quality': '质量',
+    'provider': 'Provider',
+    'streaming': '流式传输',
+    'retry': '重试',
+    'failover': '故障转移',
+    'llm': 'LLM',
+    'spec': '规范',
+    'documentation': '文档',
+    'lifecycle': '生命周期',
+    'design': '设计',
+    'iteration': '迭代',
+    'maintenance': '维护',
+    'tool': '工具',
+    'security': '安全',
+    'registry': '注册表',
+    'schema-validation': 'Schema校验',
+    'boundary': '边界',
+    'pitfalls': '陷阱',
+    'human-in-loop': '人工介入',
+    'memory': '记忆',
+    'jsonl': 'JSONL',
+    'compaction': '压缩',
+    'persistence': '持久化',
+    'collaboration': '协作',
+    'learning': '学习',
+    'knowledge': '知识',
+    'skills': 'Skills',
+    'system-prompt': '系统提示',
+    'hot-reload': '热重载',
+    'token-management': 'Token管理',
+    'hook': 'Hook',
+    'plugin': '插件',
+    'extensibility': '可扩展性',
+    'channel': '通道',
+    'transport': '传输',
+    'websocket': 'WebSocket',
+    'multi-client': '多客户端',
+    'event-bus': '事件总线',
+    'session': '会话',
+    'multi-user': '多用户',
+    'cache': '缓存',
+    'isolation': '隔离',
+    'trust-boundary': '信任边界',
+    'defense-in-depth': '纵深防御',
+    'authentication': '认证',
+    'error-handling': '错误处理',
+    'event-stream': '事件流',
+    'reducer': 'Reducer',
+    'ux': '用户体验',
+    'roadmap': '路线图',
+    'future': '未来',
+    'mcp': 'MCP',
+    'autonomous': '自主',
+  };
+
+  let categories;
+  let tags;
+  if (lang === 'zh') {
+    const topCat = CATEGORY_ZH_MAP[data.track] || data.track;
+    categories = [topCat, data.chapter];
+    tags = (data.tags || []).map(t => TAG_ZH_MAP[t] || t);
+  } else {
+    const subCat = EN_SUBCATEGORY_FIX[data.chapter] || data.chapter;
+    categories = [data.track, subCat];
+    tags = data.tags;
+  }
+
   const out = {
     title: data.title,
     description: data.description,
-    tags: data.tags,
+    tags,
     date: formatDate(data.lastUpdated),
-    categories: [data.track, data.chapter],
+    categories,
     difficulty: data.difficulty,
     reading_time: data.estimatedReadingTime,
     prerequisites: data.prerequisites,
