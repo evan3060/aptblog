@@ -10,6 +10,12 @@ cache:
   enable: true
 minify: false
 
+# Custom file paths for i18n language switcher injection
+custom_file_path:
+  header: source/_data/header.njk
+  bodyEnd: source/_data/body-end.njk
+  style: source/_data/styles.styl
+
 # ---------------------------------------------------------------
 # Scheme Settings
 # ---------------------------------------------------------------
@@ -74,6 +80,8 @@ toc:
 # ---------------------------------------------------------------
 # Footer Settings
 # ---------------------------------------------------------------
+# Disable theme's footer language dropdown; use custom header pill button
+language_switcher: false
 footer:
   powered: true
   # Beian ICP for Chinese sites (left disabled; fill in if required).
