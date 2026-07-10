@@ -124,8 +124,8 @@ describe('convertFrontmatter', () => {
     expect(out.difficulty).toBe('beginner');
     expect(out.reading_time).toBe(18);
     expect(out.prerequisites).toEqual([]);
-    expect(out.lang).toBe('zh');
-    expect(out.permalink).toBe('zh/01-dev-workflow.html');
+    expect(out.lang).toBe('zh-CN');
+    expect(out).not.toHaveProperty('permalink');
 
     for (const key of ['order', 'track', 'chapter', 'status', 'lastUpdated', 'estimatedReadingTime']) {
       expect(out).not.toHaveProperty(key);

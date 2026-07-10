@@ -35,7 +35,7 @@ function formatDate(value) {
 }
 
 export function convertFrontmatter(data, lang) {
-  return {
+  const out = {
     title: data.title,
     description: data.description,
     tags: data.tags,
@@ -44,9 +44,12 @@ export function convertFrontmatter(data, lang) {
     difficulty: data.difficulty,
     reading_time: data.estimatedReadingTime,
     prerequisites: data.prerequisites,
-    lang,
-    permalink: `${lang}/${data.slug}.html`,
+    lang: lang === 'zh' ? 'zh-CN' : lang,
   };
+  if (lang === 'en') {
+    out.permalink = `en/${data.slug}.html`;
+  }
+  return out;
 }
 
 export function rewriteImagePaths(content, slug) {
