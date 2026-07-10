@@ -170,7 +170,7 @@ exturl_icon: true
 # ---------------------------------------------------------------
 # Uses Animate.css (loaded via CDN, see vendors section).
 motion:
-  enable: true
+  enable: false
   async: false
   duration: 200
   transition:

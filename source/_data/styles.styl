@@ -1,20 +1,46 @@
-// Language switcher pill button (aptbot style)
-.menu-item-lang .nav-lang {
-  border-radius: 9999px;
-  border: 1px solid #555;
-  padding: 6px 14px;
-  font-size: 14px;
+// Language switcher sliding toggle
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  width: 56px;
+  height: 22px;
+  border-radius: 11px;
+  border: 1px solid var(--text-color, #555);
+  overflow: hidden;
   cursor: pointer;
-  color: inherit;
-  background: transparent;
-  display: inline-block;
-  line-height: 1.2;
-  text-decoration: none;
+  font-size: 12px;
+  user-select: none;
+  flex-shrink: 0;
 }
 
-@media (max-width: 767px) {
-  .menu-item-lang .nav-lang {
-    font-size: 12px;
-    padding: 4px 10px;
-  }
+.lang-toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--text-color, #555);
+  border-radius: 10px;
+  transition: transform 0.25s ease;
+  z-index: 0;
 }
+
+.lang-toggle-en .lang-toggle-slider {
+  transform: translateX(100%);
+}
+
+.lang-toggle-text {
+  flex: 1;
+  text-align: center;
+  z-index: 1;
+  transition: color 0.25s;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+// Active language text = background color (inverted), inactive = faded
+.lang-toggle-zh .lang-toggle-zh-text { color: var(--content-bg-color, #fff); }
+.lang-toggle-zh .lang-toggle-en-text { color: var(--text-color, #555); opacity: 0.5; }
+.lang-toggle-en .lang-toggle-en-text { color: var(--content-bg-color, #fff); }
+.lang-toggle-en .lang-toggle-zh-text { color: var(--text-color, #555); opacity: 0.5; }

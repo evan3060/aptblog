@@ -1,8 +1,17 @@
-{# Language switcher pill button - moved into .main-menu by JS in body-end.njk #}
+{# Language switcher sliding toggle - moved into .main-menu by JS in body-end.njk #}
 <div id="lang-switcher-source" style="display:none">
   <li class="menu-item menu-item-lang">
-    <a role="button" class="nav-lang" id="lang-switcher" href="#">
-      {% if page.lang == 'en' %}中{% else %}EN{% endif %}
-    </a>
+    <div class="lang-toggle {% if page.lang == 'en' %}lang-toggle-en{% else %}lang-toggle-zh{% endif %}" id="lang-switcher" role="button" tabindex="0">
+      <span class="lang-toggle-slider"></span>
+      <span class="lang-toggle-text lang-toggle-zh-text">中</span>
+      <span class="lang-toggle-text lang-toggle-en-text">EN</span>
+    </div>
   </li>
 </div>
+
+{# Hide sidebar on about pages for cleaner layout #}
+{% if page.path and page.path.indexOf('about') !== -1 %}
+<style>
+  .sidebar { display: none !important; }
+</style>
+{% endif %}

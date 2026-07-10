@@ -1,6 +1,6 @@
 <script>
 (function() {
-  // Move language switcher button into the main menu
+  // Move language switcher toggle into the main menu
   var source = document.getElementById('lang-switcher-source');
   var menu = document.querySelector('.main-menu');
   if (source && menu) {
@@ -9,10 +9,10 @@
     if (source.parentNode) source.parentNode.removeChild(source);
   }
 
-  // Rewrite menu links based on current language
+  // Rewrite menu links based on current language (exclude lang toggle which is a div)
   var lang = document.documentElement.lang;
   var prefix = lang === 'en' ? '/en' : '';
-  var menuLinks = document.querySelectorAll('.main-menu .menu-item a:not(.nav-lang)');
+  var menuLinks = document.querySelectorAll('.main-menu .menu-item:not(.menu-item-lang) a');
   menuLinks.forEach(function(link) {
     var href = link.getAttribute('href');
     if (href && href.charAt(0) === '/' && href.indexOf('/en') !== 0) {
@@ -20,21 +20,30 @@
     }
   });
 
-  // Language switcher click handler
+  // Language toggle click handler
   var switcher = document.getElementById('lang-switcher');
   if (switcher) {
     switcher.addEventListener('click', function(e) {
       e.preventDefault();
-      var currentLang = document.documentElement.lang;
+      var isEn = this.classList.contains('lang-toggle-en');
       var path = window.location.pathname;
       var targetUrl;
-      if (currentLang === 'zh-CN') {
-        targetUrl = '/en' + (path === '/' ? '/' : path);
-      } else {
+      if (isEn) {
+        // Currently English, switch to Chinese
         targetUrl = path.replace(/^\/en/, '') || '/';
+      } else {
+        // Currently Chinese, switch to English
+        targetUrl = '/en' + (path === '/' ? '/' : path);
       }
-      try { localStorage.setItem('aptblog.lang', currentLang === 'zh-CN' ? 'en' : 'zh-CN'); } catch(err) {}
+      try { localStorage.setItem('aptblog.lang', isEn ? 'zh-CN' : 'en'); } catch(err) {}
       window.location.href = targetUrl;
+    });
+    // Keyboard accessibility
+    switcher.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
     });
   }
 
