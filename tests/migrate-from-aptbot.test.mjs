@@ -99,7 +99,7 @@ body
 `;
 
 describe('convertFrontmatter', () => {
-  test('published zh article maps fields and drops source-only fields', () => {
+  test('published zh article maps fields, adds lang/permalink, drops source-only fields', () => {
     const source = {
       slug: '01-dev-workflow',
       title: 'AI 辅助开发工作流',
@@ -114,7 +114,7 @@ describe('convertFrontmatter', () => {
       lastUpdated: '2026-07-02',
       tags: ['workflow', 'tdd'],
     };
-    const out = convertFrontmatter(source);
+    const out = convertFrontmatter(source, 'zh');
 
     expect(out.title).toBe(source.title);
     expect(out.description).toBe(source.description);
@@ -124,10 +124,33 @@ describe('convertFrontmatter', () => {
     expect(out.difficulty).toBe('beginner');
     expect(out.reading_time).toBe(18);
     expect(out.prerequisites).toEqual([]);
+    expect(out.lang).toBe('zh');
+    expect(out.permalink).toBe('zh/01-dev-workflow.html');
 
     for (const key of ['order', 'track', 'chapter', 'status', 'lastUpdated', 'estimatedReadingTime']) {
       expect(out).not.toHaveProperty(key);
     }
+  });
+
+  test('published en article gets lang en and en permalink', () => {
+    const source = {
+      slug: '01-dev-workflow',
+      title: 'AI Dev Workflow',
+      description: 'four phases',
+      track: 'ai-coding-practice',
+      chapter: 'methodology',
+      order: 14,
+      difficulty: 'beginner',
+      estimatedReadingTime: 18,
+      status: 'published',
+      prerequisites: [],
+      lastUpdated: '2026-07-02',
+      tags: ['workflow'],
+    };
+    const out = convertFrontmatter(source, 'en');
+
+    expect(out.lang).toBe('en');
+    expect(out.permalink).toBe('en/01-dev-workflow.html');
   });
 });
 
@@ -140,15 +163,15 @@ describe('rewriteImagePaths', () => {
 });
 
 describe('migrateAll output directories', () => {
-  test('published english article goes to _posts-en not _posts', async () => {
+  test('published english article goes to _posts with .en.md suffix', async () => {
     const sourceDir = await makeTempSource({ '01-dev-workflow.en.md': EN_PUBLISHED });
     const targetDir = await makeTempDir('aptblog-tgt-');
     await migrateAll({ sourceDir, targetSourceDir: targetDir, dryRun: false });
 
-    const enPosts = await readdir(path.join(targetDir, '_posts-en'));
-    const zhPosts = await readdir(path.join(targetDir, '_posts'));
-    expect(enPosts).toContain('01-dev-workflow.md');
-    expect(zhPosts).not.toContain('01-dev-workflow.md');
+    const posts = await readdir(path.join(targetDir, '_posts'));
+    expect(posts).toContain('01-dev-workflow.en.md');
+    expect(posts).not.toContain('01-dev-workflow.md');
+    await expect(readdir(path.join(targetDir, '_posts-en'))).rejects.toBeDefined();
   });
 
   test('planned article goes to _drafts not _posts', async () => {
@@ -180,7 +203,7 @@ describe('migrateAll dry-run', () => {
       console.log = origLog;
     }
 
-    for (const sub of ['_posts', '_posts-en', '_drafts', 'images']) {
+    for (const sub of ['_posts', '_drafts', 'images']) {
       await expect(readdir(path.join(targetDir, sub))).rejects.toBeDefined();
     }
     expect(printed.length).toBeGreaterThan(0);
@@ -191,6 +214,7 @@ describe('migrateAll idempotency', () => {
   test('second run produces identical results', async () => {
     const sourceDir = await makeTempSource({
       '01-dev-workflow.md': ZH_PUBLISHED,
+      '01-dev-workflow.en.md': EN_PUBLISHED,
       'images/dev-workflow.png': Buffer.from('fake-png-bytes'),
     });
     const targetDir = await makeTempDir('aptblog-tgt-');
@@ -203,6 +227,8 @@ describe('migrateAll idempotency', () => {
 
     expect(second).toEqual(first);
     expect(first['_posts/01-dev-workflow.md']).toBeDefined();
+    expect(first['_posts/01-dev-workflow.en.md']).toBeDefined();
+    expect(first['_posts-en/01-dev-workflow.md']).toBeUndefined();
     expect(first['images/01-dev-workflow/dev-workflow.png']).toBeDefined();
   });
 });

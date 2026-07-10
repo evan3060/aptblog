@@ -18,6 +18,8 @@ difficulty: intermediate
 reading_time: 18
 prerequisites:
   - 08-channel-transport
+lang: en
+permalink: en/09-session-multiuser.html
 ---
 
 The previous article covered Channels -- the abstraction for multi-device access. Channels solve the problem of "how events are transmitted," but not the problem of "how state is managed."

@@ -19,6 +19,8 @@ categories:
 difficulty: beginner
 reading_time: 18
 prerequisites: []
+lang: en
+permalink: en/02-coding-accuracy.html
 ---
 
 Code written by AI has a deceptively dangerous quality: it **looks correct**. Naming is reasonable, structure is tidy, comments are complete — often cleaner than most human-written code. But run it, and you discover it references nonexistent APIs, misses boundary conditions, and hides bugs in untested paths. This isn't the AI being malicious; it's inherent to how large language models work: they generate code based on probability distributions, not execution verification. To elevate AI-written code from "it works" to "it's trustworthy," you need a set of interlocking quality defenses.

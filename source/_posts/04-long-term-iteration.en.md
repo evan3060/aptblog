@@ -18,6 +18,8 @@ categories:
 difficulty: advanced
 reading_time: 18
 prerequisites: []
+lang: en
+permalink: en/04-long-term-iteration.html
 ---
 
 If you've tried using AI to develop a real project, you've likely experienced a trajectory like this: The first version, you had the AI quickly build a prototype, the code ran, and you thought "AI is amazing, development efficiency has at least quintupled." The second version, you had the AI add new features — although you started encountering "change A breaks B" situations, overall progress continued. By the third version, you found the code was completely unmaintainable — changing one line required modifying five files, adding one field introduced three bugs, and every new AI session suggested "maybe we should just rewrite it."

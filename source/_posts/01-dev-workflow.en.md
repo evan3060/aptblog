@@ -16,6 +16,8 @@ categories:
 difficulty: beginner
 reading_time: 18
 prerequisites: []
+lang: en
+permalink: en/01-dev-workflow.html
 ---
 
 If you've tried using AI to write code, you've likely encountered this scenario: The first conversation produces a beautiful solution, you nod and say "great, let's go with this," but during execution the AI starts freelancing — skipping tests, stuffing implementation code into planning documents, trying the same mistake ten times over, or halfway through contradicting its own earlier design. This isn't the AI being unintelligent; it's that you lack a workflow to constrain it. AI output is inherently unpredictable, and relying on "writing careful prompts" is far from enough. You need a process to manage the uncertainty.

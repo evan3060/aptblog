@@ -16,6 +16,8 @@ difficulty: beginner
 reading_time: 20
 prerequisites:
   - 01-what-is-agent
+lang: zh
+permalink: zh/02-aptbot-architecture.html
 ---
 
 上一篇文章我们从"概念层"理解了 agent 是什么——ReAct 循环、四大组件、agent loop。这篇文章切换到"工程层"：一个 agent 系统的代码应该怎么组织？层怎么划分、依赖怎么管理、各个模块之间如何协作而不互相纠缠？

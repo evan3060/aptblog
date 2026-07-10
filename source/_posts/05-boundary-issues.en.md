@@ -19,6 +19,8 @@ difficulty: intermediate
 reading_time: 18
 prerequisites:
   - 04-long-term-iteration
+lang: en
+permalink: en/05-boundary-issues.html
 ---
 
 If you're new to AI-assisted development, you've likely experienced two extreme feelings: sometimes AI is like a god — writing perfect code, tests and documentation all in one go, ten times faster than you; other times AI is like a terrible teammate — implementing features you never asked for, introducing dependencies you explicitly told it not to, failing at the same mistake ten times in a row.

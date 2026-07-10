@@ -17,6 +17,8 @@ difficulty: advanced
 reading_time: 18
 prerequisites:
   - 09-session-multiuser
+lang: en
+permalink: en/10-security-model.html
 ---
 
 Several previous articles have mentioned various security design points: tool timeout, path validation, UUID, scrypt, Bearer token... This article connects them all to look at aptbot's overall security model. Security is not a single point, but the accumulation of multiple layers of defense -- if any one layer is bypassed, the next layer can still catch it. For agent systems, security is not "just add authentication and you're done" -- because the attack surface has one more dimension than traditional web applications: **the LLM itself is also part of the attack surface.**

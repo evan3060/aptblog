@@ -18,6 +18,8 @@ reading_time: 15
 prerequisites:
   - 01-what-is-agent
   - 02-aptbot-architecture
+lang: en
+permalink: en/04-tool-system.html
 ---
 
 If the LLM is the agent's "brain," then tools are the agent's "hands." The brain thinks about "what to do," and the hands make it happen. Without tools, an agent is just a chatbot that can talk—it knows the answers but cannot touch the world. But tools are a double-edged sword: a tool that can execute bash commands means the model holds keys that can operate your entire operating system. How to enable the agent to "act" without "misbehaving" is the core challenge of tool system design.

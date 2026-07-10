@@ -19,6 +19,8 @@ difficulty: intermediate
 reading_time: 18
 prerequisites:
   - 05-boundary-issues
+lang: en
+permalink: en/06-continuous-improvement.html
 ---
 
 The previous five articles discussed process, quality, documentation, long-term iteration maintenance, and boundary issues. This article is the culmination of Track 2 — returning to methodology itself. AI-assisted development isn't a static skill; it continuously changes with model upgrades, tool evolution, and project accumulation. The workflow that works well today may become outdated in six months due to changes in model behavior. This article doesn't discuss "a set of rules" — it discusses a methodology for **letting rules continuously evolve**: how to establish effective collaboration with AI, how to learn from AI output, how toconsolidate knowledge, how to evaluate output, how to continuously optimize processes, and how to avoid over-reliance.

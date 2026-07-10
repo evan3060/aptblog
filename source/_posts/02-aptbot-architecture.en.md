@@ -17,6 +17,8 @@ difficulty: beginner
 reading_time: 20
 prerequisites:
   - 01-what-is-agent
+lang: en
+permalink: en/02-aptbot-architecture.html
 ---
 
 In the previous article, we understood what an agent is at the "conceptual level"—the ReAct loop, four core components, and the agent loop. This article shifts to the "engineering level": how should an agent system's code be organized? How are layers divided? How are dependencies managed? How do modules collaborate without tangling with each other?

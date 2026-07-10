@@ -16,6 +16,8 @@ categories:
 difficulty: advanced
 reading_time: 20
 prerequisites: []
+lang: en
+permalink: en/13-agent-future-roadmap.html
 ---
 
 This is the last article of Track 1. The previous 12 articles have covered aptbot's architecture, Provider, Tool, Memory, Skills, Hook, Channel, Session, security, error handling, and evolution review -- these are "existing designs." This article looks to the future -- starting from 0.2.3, exploring the L2/L3 roadmap, multi-modal, MCP, self-evolving skills, browser and system control, and idle autonomous action in the long term. Finally, we return to aptbot's core philosophy "project as learning" and provide a conclusion for the entire Track 1.

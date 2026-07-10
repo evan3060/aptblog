@@ -16,6 +16,8 @@ categories:
 difficulty: beginner
 reading_time: 18
 prerequisites: []
+lang: en
+permalink: en/01-what-is-agent.html
 ---
 
 If you're new to the term "agent," you might be wondering: how is it different from a chatbot like ChatGPT? Why is everyone talking about agents? And what is aptbot? This article starts from scratch, explains "what an agent really is," compares several mainstream agent design approaches, and finally lands on aptbot's choices.

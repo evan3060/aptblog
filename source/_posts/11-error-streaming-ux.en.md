@@ -18,6 +18,8 @@ difficulty: advanced
 reading_time: 18
 prerequisites:
   - 10-security-model
+lang: en
+permalink: en/11-error-streaming-ux.html
 ---
 
 An agent system's "reliability" and "UX" may seem like two separate topics, but in aptbot they are actually the same thing -- both about "how events flow from the agent to the user, and how errors are handled." This article weaves these two threads together to see how aptbot's error handling philosophy, event stream abstraction, and UI rendering patterns collaborate.

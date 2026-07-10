@@ -15,6 +15,8 @@ categories:
 difficulty: beginner
 reading_time: 18
 prerequisites: []
+lang: zh
+permalink: zh/03-spec-document-management.html
 ---
 
 在 AI 辅助开发中，有一件事的成本常常被低估——重复解释。每次新开一个会话，都要重新告诉 AI"这个项目的架构是什么样的""为什么选 A 不选 B""哪些约束不能碰"。如果没有文档化的 spec（规格说明），你就是在用 token 和耐心为项目的"失忆"买单。spec 的本质是 AI 辅助开发的"项目记忆"与"决策宪法"——它让 AI 每次会话都能快速恢复上下文，让人的设计决策不被时间冲淡。

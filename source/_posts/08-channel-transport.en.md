@@ -18,6 +18,8 @@ difficulty: intermediate
 reading_time: 16
 prerequisites:
   - 07-hook-system
+lang: en
+permalink: en/08-channel-transport.html
 ---
 
 An agent serving multiple clients simultaneously is the core scenario of aptbot 0.2.x: you open WebUI on your computer to talk to the agent, switch to your phone on the go, and continue on another computer when you get home. This requires **the agent's state to be independent of the client connection** -- clients can disconnect and reconnect, but the agent should not restart, nor should it lose conversation context.

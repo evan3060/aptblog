@@ -14,6 +14,8 @@ difficulty: intermediate
 reading_time: 18
 prerequisites:
   - 04-long-term-iteration
+lang: zh
+permalink: zh/05-boundary-issues.html
 ---
 
 如果你刚接触 AI 辅助开发，很可能会有两种极端感受：有时候 AI 像神一样——给你写出完美的代码、连测试带文档一步到位、速度比你快十倍；有时候 AI 又像猪队友——写出你从未要求的功能、引入你明确说不要的依赖、在同一个错误上反复跌倒十次。

@@ -17,6 +17,8 @@ reading_time: 15
 prerequisites:
   - 01-what-is-agent
   - 02-aptbot-architecture
+lang: zh
+permalink: zh/04-tool-system.html
 ---
 
 如果说 LLM 是 agent 的"大脑"，那么 tool 就是 agent 的"双手"。大脑负责思考"该做什么"，双手负责"把它做成"。没有 tool，agent 只是一个能说会道的 chatbot——它知道答案，但无法触碰世界。但 tool 也是一把双刃剑：一个能执行 bash 命令的 tool，意味着模型手里有了一把可以操作你整个操作系统的钥匙。如何让 agent 既能"动手"又不"乱来"，是 tool 系统设计的核心命题。

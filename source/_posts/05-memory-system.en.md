@@ -18,6 +18,8 @@ reading_time: 16
 prerequisites:
   - 01-what-is-agent
   - 04-tool-system
+lang: en
+permalink: en/05-memory-system.html
 ---
 
 An agent without memory starts from zero every conversation. It doesn't remember what you said ten minutes ago, doesn't remember which bug you fixed yesterday, doesn't remember the progress on this project from last week. It's like a colleague who needs you to reintroduce yourself every time you meet—you can tolerate it, but you can't collaborate.

@@ -17,6 +17,8 @@ difficulty: intermediate
 reading_time: 15
 prerequisites:
   - 06-skills-system
+lang: en
+permalink: en/07-hook-system.html
 ---
 
 An agent's core loop is fixed -- the ReAct loop repeatedly executes "reasoning → action → observation." But at each key node in the loop, we often need to insert "side actions": logging, reporting metrics, auditing tool calls, automatically injecting steering information, intercepting dangerous commands...

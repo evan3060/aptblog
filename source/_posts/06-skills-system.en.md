@@ -18,6 +18,8 @@ reading_time: 15
 prerequisites:
   - 01-what-is-agent
   - 04-tool-system
+lang: en
+permalink: en/06-skills-system.html
 ---
 
 The Tool system gives the agent the ability to "do things," but when the agent faces the question of "how to use these tools to do things," it needs another layer of knowledge—the **wisdom of using tools**.

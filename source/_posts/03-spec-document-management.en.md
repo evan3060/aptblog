@@ -18,6 +18,8 @@ categories:
 difficulty: beginner
 reading_time: 18
 prerequisites: []
+lang: en
+permalink: en/03-spec-document-management.html
 ---
 
 In AI-assisted development, one cost is often underestimated — repeated explanation. Every new session requires retelling the AI "what's the architecture of this project," "why did we choose A over B," "which constraints can't be violated." Without documented specs, you're paying for the project's "amnesia" with tokens and patience. The spec is essentially the **project memory and decision constitution** for AI-assisted development — it lets the AI quickly restore context in every session and prevents your design decisions from fading over time.

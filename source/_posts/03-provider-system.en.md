@@ -18,6 +18,8 @@ difficulty: intermediate
 reading_time: 22
 prerequisites:
   - 02-aptbot-architecture
+lang: en
+permalink: en/03-provider-system.html
 ---
 
 In the previous architecture article, we learned that Provider is one of the key components in the core layer—it acts as the bridge between the agent and LLM services. But this bridge is not a straight pipe; it's a complete system encompassing protocol adaptation, streaming control, error classification, and failover.

@@ -11,7 +11,7 @@ const DEFAULT_TARGET = path.resolve(PROJECT_ROOT, 'source');
 // Per spec §3.6, only these target dirs are cleared each run. _drafts is NOT
 // cleared — it may hold hand-written drafts unrelated to this migration; draft
 // files written here are made idempotent by overwriting the same slug filename.
-const OUTPUT_DIRS = ['_posts', '_posts-en', 'images'];
+const OUTPUT_DIRS = ['_posts', 'images'];
 const IMAGE_PREFIX = '/learn/articles/images/';
 
 export function parseArticle(rawContent, filename) {
@@ -34,7 +34,7 @@ function formatDate(value) {
   return String(value);
 }
 
-export function convertFrontmatter(data) {
+export function convertFrontmatter(data, lang) {
   return {
     title: data.title,
     description: data.description,
@@ -44,6 +44,8 @@ export function convertFrontmatter(data) {
     difficulty: data.difficulty,
     reading_time: data.estimatedReadingTime,
     prerequisites: data.prerequisites,
+    lang,
+    permalink: `${lang}/${data.slug}.html`,
   };
 }
 
@@ -53,7 +55,14 @@ export function rewriteImagePaths(content, slug) {
 
 export function getOutputDir(lang, status) {
   if (status === 'planned') return '_drafts';
-  return lang === 'en' ? '_posts-en' : '_posts';
+  return '_posts';
+}
+
+// English articles use .en.md suffix to avoid filename collision with Chinese
+// counterparts (both share the same slug). The permalink is set in frontmatter
+// so the URL is clean: en/<slug>.html (not en/<slug>.en.html).
+export function getOutputFilename(slug, lang) {
+  return lang === 'en' ? `${slug}.en.md` : `${slug}.md`;
 }
 
 export function matchImageToSlug(imageBaseName, slugs) {
@@ -104,11 +113,12 @@ export async function migrateAll({ sourceDir, targetSourceDir, dryRun = false })
     try {
       const raw = await readFile(filePath, 'utf-8');
       const article = parseArticle(raw, file.name);
-      const targetFm = convertFrontmatter(article.data);
+      const targetFm = convertFrontmatter(article.data, article.lang);
       const rewritten = rewriteImagePaths(article.content, article.slug);
       const output = matter.stringify(rewritten, targetFm);
       const outDir = getOutputDir(article.lang, article.data.status);
-      const outPath = path.join(targetSourceDir, outDir, `${article.slug}.md`);
+      const outName = getOutputFilename(article.slug, article.lang);
+      const outPath = path.join(targetSourceDir, outDir, outName);
       articleContents.push({ slug: article.slug, content: article.content });
       if (dryRun) {
         console.log(`[dry-run] would write ${path.relative(targetSourceDir, outPath)}`);

@@ -13,6 +13,8 @@ categories:
 difficulty: beginner
 reading_time: 18
 prerequisites: []
+lang: zh
+permalink: zh/01-dev-workflow.html
 ---
 
 如果你试过让 AI 写代码，大概率遇到过这种情况：第一次对话时 AI 给出了漂亮的方案，你点头说"好，就按这个做"，但执行起来 AI 开始自由发挥——跳过测试、在计划文档里塞实现代码、同一个错误反复试十遍、做到一半又推翻自己前面的设计。这不是 AI 不够聪明，而是你缺少一套约束它的工作流。AI 的输出天然不可预测，靠"仔细写 prompt"远远不够，需要用流程把不确定性管起来。

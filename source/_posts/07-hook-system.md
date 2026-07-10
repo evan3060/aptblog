@@ -16,6 +16,8 @@ difficulty: intermediate
 reading_time: 15
 prerequisites:
   - 06-skills-system
+lang: zh
+permalink: zh/07-hook-system.html
 ---
 
 agent 的核心循环是固定的——ReAct 循环反复执行"推理→行动→观察"。但在循环的每个关键节点，经常需要插入一些"侧动作"：记日志、上报监控、审计工具调用、自动注入 steering 信息、拦截危险的命令……

@@ -17,6 +17,8 @@ difficulty: intermediate
 reading_time: 16
 prerequisites:
   - 07-hook-system
+lang: zh
+permalink: zh/08-channel-transport.html
 ---
 
 一个 agent 同时服务多个客户端，是 aptbot 0.2.x 的核心场景：你在电脑上打开 WebUI 跟 agent 对话，出门切换到手机继续，回家在另一台电脑上接续。这要求 **agent 的状态独立于客户端连接**——客户端可以断开重连，agent 不应该重启，也不应该丢失对话上下文。

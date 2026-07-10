@@ -17,6 +17,8 @@ reading_time: 15
 prerequisites:
   - 01-what-is-agent
   - 04-tool-system
+lang: zh
+permalink: zh/06-skills-system.html
 ---
 
 Tool 系统给了 agent "做事"的能力，但当 agent 面对"如何用这些工具做事"的问题时，还需要另一层知识——**使用工具的"智慧"**。

@@ -16,6 +16,8 @@ difficulty: advanced
 reading_time: 18
 prerequisites:
   - 09-session-multiuser
+lang: zh
+permalink: zh/10-security-model.html
 ---
 
 前面几篇文章散落提到不少安全设计：工具超时、路径校验、UUID、scrypt、Bearer token……这篇文章把它们串起来，看 aptbot 的整体安全模型。安全不是单点，是多层防护的叠加——任何一层被绕过，下一层还能兜底。对于 agent 系统来说，安全不是"加个认证就完事"——因为攻击面比传统 Web 应用多了一个维度：**LLM 本身也是攻击面的一部分**。

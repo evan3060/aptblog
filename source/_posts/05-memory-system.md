@@ -17,6 +17,8 @@ reading_time: 16
 prerequisites:
   - 01-what-is-agent
   - 04-tool-system
+lang: zh
+permalink: zh/05-memory-system.html
 ---
 
 没有记忆的 agent 每次对话都从零开始。它不记得你十分钟前说了什么，不记得昨天修了哪个 bug，不记得这个项目上周的进度。这就像一个同事每次见面都要你重新介绍自己——你能容忍，但无法合作。
