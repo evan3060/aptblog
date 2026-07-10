@@ -7,7 +7,7 @@
 # Theme Core
 # ---------------------------------------------------------------
 cache:
-  enable: true
+  enable: false
 minify: false
 
 # Custom file paths for i18n language switcher injection

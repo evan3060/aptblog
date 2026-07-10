@@ -154,9 +154,20 @@ if (typeof hexo !== 'undefined') {
     }, []);
   });
 
-  // Inject menu_prefix for menu link rewriting
+  // Inject menu_prefix for menu link rewriting and language-aware description
+  // Priority 20 ensures this runs AFTER theme's template_locals filter (default priority 10)
   hexo.extend.filter.register('template_locals', function(locals) {
-    locals.menu_prefix = locals.page && locals.page.lang === 'en' ? '/en' : '';
+    const isEn = locals.page && locals.page.lang === 'en';
+    locals.menu_prefix = isEn ? '/en' : '';
+    // Override description for English pages (theme falls back to config.description which is Chinese)
+    if (isEn) {
+      const enDesc = 'An independent tech blog extended from aptbot, documenting Agent practices and AI coding experiences';
+      locals.description = enDesc;
+      // Set page.description so open_graph() helper uses English instead of config.description
+      if (locals.page && !locals.page.description) {
+        locals.page.description = enDesc;
+      }
+    }
     return locals;
-  });
+  }, 20);
 }
