@@ -1,7 +1,7 @@
 ---
 title: 关于
 date: 2026-07-10
-lang: zh
+lang: zh-CN
 permalink: about/index.html
 ---
 
