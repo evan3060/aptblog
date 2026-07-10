@@ -12,11 +12,12 @@
 2. **内容迁移**：aptbot `src/learn/articles/` 18 篇文章（Track 1 agent-practice 12 篇 + Track 2 ai-coding-practice 6 篇，中英双语 36 文件 + 配套图片）→ aptblog Hexo 站点，通过自动化脚本一次性完成。注：原始设计文档称"19 篇"系笔误，经 grep 实际验证为 18 篇（编号跳过 12）。
 3. **Hexo 站点初始化与配置**：Next 主题、i18n 双语、Giscus 评论、SEO 插件
 4. **首次手动部署**：本地构建 → git push → VPS pull + 重建 → 验证 `https://blog.aptbot.de/`
+5. **CI/CD 自动部署**：GitHub Actions 配置，push 到 main 自动构建 + rsync 到 VPS public/，消除日常发文的手动 SSH 操作
+6. **日常发文 skill**：建立 `publish-post` skill，封装日常发文的完整流程（新建文章 → 本地预览 → git push → CI 自动部署 → 线上验证）
 
 ### 1.2 不在本次范围
 
 - **wechatsync 集成**：运行时操作（浏览器扩展同步到公众号草稿），非迁移任务，站点上线后手动操作
-- **CI/CD 自动部署**：设计 §7.1 的 GitHub Actions 延后，先跑通手动部署流程
 - **aptbot 侧 learn 系统改动**：设计 §8 标注可选，延后处理
 - **新文章写作**：仅迁移已有 18 篇，不写新内容
 
@@ -27,6 +28,8 @@
 - 中英双语可切换（`/zh/...` + `/en/...`）
 - VPS 上 aptblog 用户可独立完成 `git pull && npm ci && npx hexo generate` 部署，无需 root
 - 迁移脚本可重复执行，每次运行清空目标目录后重新生成
+- git push 到 main 后，GitHub Actions 自动构建并部署到 VPS，无需手动 SSH
+- `publish-post` skill 可用：给定文章标题/内容，自动完成从创建到线上发布的全流程
 
 ## 2. VPS 环境完备性检查结果
 
@@ -197,22 +200,87 @@ aptblog/
    - `npx hexo generate`
 4. 验证：`curl -I https://blog.aptbot.de/` 返回 200，首页列出文章
 
-### 5.2 日常更新流程
+### 5.2 日常更新流程（CI/CD 配置后）
 
 1. 本地：写/改文章 → `npx hexo generate` 预览 → git push
-2. VPS：`cd /var/www/aptblog && git pull && npm ci && npx hexo generate`
-3. nginx 无需 reload（静态文件直接生效，nginx 每次请求从磁盘读取）
+2. GitHub Actions 自动触发：checkout → npm ci → hexo generate → rsync public/ 到 VPS
+3. nginx 无需 reload（静态文件直接生效）
+4. 线上即时生效，无需手动 SSH
 
-### 5.3 CI/CD（延后）
+### 5.3 CI/CD 自动部署（本次实施）
 
-站点手动跑通后再配 GitHub Actions（设计 §7.1）：
-- 触发：push to main
-- 步骤：checkout → setup-node → npm ci → hexo generate → rsync public/ 到 VPS
-- VPS 配置部署专用 SSH key（authorized_keys 用 `command=` 限制）
+**GitHub Actions 配置（`.github/workflows/deploy.yml`）：**
+- 触发条件：push to main
+- 步骤：checkout → setup-node 20 → npm ci → npx hexo generate → rsync `public/` 到 VPS `/var/www/aptblog/public/`
+- 构建产物仅含 public/（源码不出 CI runner）
+- rsync 使用 `--delete` 保持 VPS public/ 与构建产物完全一致
 
-## 6. 错误处理与边界条件
+**VPS 部署专用 SSH key：**
+- 在 GitHub repo Settings → Secrets 存入部署私钥（`DEPLOY_SSH_KEY`）
+- VPS 上 aptblog 用户的 `~/.ssh/authorized_keys` 追加对应公钥
+- authorized_keys 行内用 `command="rsync ..."` 限制该 key 仅能执行 rsync 接收，限制 `from=` IP 为 GitHub Actions IP 段（可选，rsync 本身已限制写入路径）
+- 该 key 独立于 evan 个人 key，仅 CI 使用
 
-### 6.1 迁移脚本
+**与手动部署的关系：**
+- CI/CD 配置后，日常发文完全无需手动 SSH
+- 首次部署仍需手动（clone 仓库 + npm ci + 首次 hexo generate），CI/CD 在首次部署验证通过后启用
+- 紧急回滚：aptblog 用户 SSH 登录，`git checkout <commit> && npx hexo generate` 手动回滚
+
+### 5.4 首次部署与 CI/CD 的顺序
+
+1. 本地建好站点（迁移 + 配置）→ git push 到 GitHub
+2. VPS 手动 clone + npm ci + hexo generate（§5.1）
+3. 验证 `https://blog.aptbot.de/` 正常
+4. 配置 GitHub Actions + 部署 SSH key（§5.3）
+5. 触发一次 CI 验证（push 空提交或手动 trigger）
+6. 验证 CI 部署后站点正常
+
+## 6. 日常发文 skill 设计
+
+### 6.1 skill 职责
+
+封装日常发文的完整流程，用户只需提供文章内容，skill 自动完成从创建到线上发布。
+
+### 6.2 skill 名称与位置
+
+- skill 名称：`publish-post`
+- 位置：`.agents/skills/publish-post/SKILL.md`（遵循项目 skill 目录结构）
+
+### 6.3 skill 触发条件
+
+用户表达发文意图时触发，如：
+- "发布一篇新文章"
+- "发一篇关于 X 的博客"
+- "把这个内容发到 blog"
+
+### 6.4 skill 流程
+
+1. **收集文章信息**：标题、内容（Markdown）、可选的 tags/categories/description
+2. **生成 frontmatter**：title、date（当前日期）、tags、categories、description（若未提供则从正文摘要）
+3. **写入文件**：`source/_posts/<slug>.md`（slug 从标题生成，中文标题需 transliterate 或手动指定）
+4. **本地预览**：`npx hexo server` 启动（若未运行）→ 提示用户浏览器预览 → 用户确认
+5. **git 提交**：`git add source/_posts/<slug>.md` + `git commit -m "post: <title>"`
+6. **git push**：触发 CI/CD 自动部署
+7. **等待 CI**：可轮询 GitHub Actions 状态或等待固定时间
+8. **线上验证**：`curl -sI https://blog.aptbot.de/zh/<slug>.html` 确认 200
+9. **报告结果**：文章 URL、CI 状态、线上验证结果
+
+### 6.5 skill 边界
+
+- **不负责内容创作**：skill 不生成文章正文，仅处理发布流程
+- **不负责 wechatsync**：公众号同步是独立的手动操作
+- **草稿支持**：若用户说"存草稿"，写入 `source/_drafts/` 而非 `_posts/`，不 push
+- **双语支持**：若用户提供中英双版本，分别写入 `_posts/` 和 `_posts-en/`
+
+### 6.6 skill 依赖
+
+- Hexo 站点已初始化（`_config.yml` 存在）
+- CI/CD 已配置（git push 后自动部署）
+- 本地可 SSH 到 VPS（用于线上验证步骤，或用 curl 代替）
+
+## 7. 错误处理与边界条件
+
+### 7.1 迁移脚本
 
 - 源文章 frontmatter 不符合 zod schema → 脚本不应崩溃，警告 + 跳过
 - 图片引用路径格式统一为 `/learn/articles/images/<name>.png`（经 grep 验证），脚本用单一正则匹配即可
@@ -220,20 +288,33 @@ aptblog/
 - 中英文章 slug 相同 → i18n 通过目录区分（_posts/ vs _posts-en/），不冲突
 - 图片文件名与 slug 部分匹配（如 `dev-workflow.png` 与 slug `01-dev-workflow`）→ 脚本用包含关系匹配，无匹配的图片归入 misc/
 
-### 6.2 部署
+### 7.2 部署
 
 - git clone 到非空目录失败 → 见 §2.3 处理方式
 - npm ci 失败（lockfile 不一致）→ 用 npm install 兜底，后续固定 lockfile
 - hexo generate 失败 → 检查主题/插件配置，nginx 仍服务旧的 public/（不影响线上）
 
-### 6.3 双语路由
+### 7.3 双语路由
 
 - i18n 插件未正确配置 → 文章 404，需验证 `_config.yml` 的 i18n 配置
 - 默认语言访问 `/` 应重定向到 `/zh/` 或显示中文首页（i18n 插件行为）
 
-## 7. 测试策略
+### 7.4 CI/CD
 
-### 7.1 迁移脚本测试
+- GitHub Actions 构建失败 → 不会触发 rsync，线上保持旧版本不受影响
+- rsync 传输中断 → VPS public/ 可能半更新，重新触发 CI 或手动 SSH 重建
+- 部署 SSH key 泄露 → authorized_keys 用 `command=` 限制，仅能 rsync 写入 public/，无法执行其他命令
+
+### 7.5 publish-post skill
+
+- 文章 slug 冲突（已存在同名文件）→ 技能报错，提示用户修改标题或手动指定 slug
+- git push 失败（网络/权限）→ 技能报错，提示用户检查网络或 SSH key
+- CI 部署超时 → 技能等待固定时间后超时，提示用户手动检查 GitHub Actions 状态
+- 线上验证 404 → CI 可能未完成，或 permalink 配置错误，技能提示用户检查
+
+## 8. 测试策略
+
+### 8.1 迁移脚本测试
 
 脚本作为可重复执行的独立模块，需验证：
 - 给定固定输入（aptbot 真实文章），输出符合预期 frontmatter 映射
@@ -243,12 +324,25 @@ aptblog/
 
 测试方式：先在真实 aptbot 文章上执行 dry-run，人工核对输出；再执行实际迁移，本地 `hexo server` 验证渲染。
 
-### 7.2 站点验证
+### 8.2 站点验证
 
 - 本地 `hexo server` 预览：首页、文章页、中英切换、图片显示、代码高亮
 - VPS 部署后：`curl -I` 验证 200、浏览器访问验证渲染、移动端响应式
 
-## 8. 参考资料
+### 8.3 CI/CD 验证
+
+- push 空提交到 main，观察 GitHub Actions 是否触发
+- 验证 Actions 构建成功 + rsync 执行无错
+- 验证 VPS public/ 更新（文件时间戳变化）
+- 验证线上站点内容更新（curl 首页对比）
+
+### 8.4 publish-post skill 验证
+
+- 用 skill 发布一篇测试文章，验证全流程：文件创建 → 本地预览 → git push → CI 触发 → 线上 200
+- 验证草稿模式：写入 _drafts/ 且不 push
+- 验证 slug 冲突检测
+
+## 9. 参考资料
 
 - 原始设计文档：`2026-07-10-aptblog-blog-solution-design.md`（aptblog 项目根目录）
 - aptbot learn 源文章：`aptbot/src/learn/articles/`
