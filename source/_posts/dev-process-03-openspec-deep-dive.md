@@ -17,6 +17,8 @@ lang: zh-CN
 
 ---
 
+![AI研发流程深度解析（三）：OpenSpec深度拆解——Spec即共识契约](/images/dev-process/dev-process-03-openspec-deep-dive.png)
+
 ## 1. 架构拆解
 
 ### 1.1三层架构：CLI工具 + 目录约定 + Slash Command
@@ -636,3 +638,7 @@ Delta合并虽然程序化执行，但以下风险仍然存在：
 | 18 | Archive保留完整上下文 | 可回溯每个变更的"为什么" | 只有git log无法理解设计决策的来龙去脉 |
 | 19 | Bulk archive + 冲突检测 | 并行变更归档时检测spec冲突 | 多个change同时修改同一spec时静默合并不安全 |
 | 20 | 82个归档变更的演进记录 | 每个变更都是一次设计决策的实验 | 从演进历史中学习什么有效什么无效 |
+
+---
+
+点击下方"**阅读原文**"进入我的演示网站。

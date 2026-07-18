@@ -18,6 +18,8 @@ lang: zh-CN
 
 ---
 
+![AI研发流程深度解析（五）：mattpocock-skills深度拆解——小而可组合的工程师技能](/images/dev-process/dev-process-05-mattpocock-deep-dive.png)
+
 ## 1. 架构拆解
 
 ### 1.1 Skill分类体系
@@ -688,3 +690,7 @@ mattpocock-skills的核心贡献不在于流程设计（它明确不设计流程
 6. **Wayfinder渐进式探索**：fog-of-war模式适合真正模糊的超大工作规划
 
 它的局限也很明确：缺乏流程强制保障、缺乏spec演进追踪、缺乏自动化工具。这些局限是"不拥有流程"立场的必然结果——如果你不拥有流程，就不能强制执行它。
+
+---
+
+点击下方"**阅读原文**"进入我的演示网站。

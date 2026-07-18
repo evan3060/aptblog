@@ -17,6 +17,8 @@ lang: zh-CN
 
 ---
 
+![AI研发流程深度解析（一）：热门研发流程概览](/images/dev-process/dev-process-01-workflows-overview.png)
+
 ## 1. 为什么需要流程
 
 AI辅助编码正在经历一次范式转移。一个人借助AI agent可以达到过去一个团队的产出——gstack的作者Garry Tan声称自己的代码产出速度是2013年的810倍。ECC项目号称覆盖12+ 语言生态系统、跨7+ AI harness平台。Andrej Karpathy说自己"基本上没写过一行代码"。
@@ -272,3 +274,7 @@ OpenSpec      mattpocock     Superpowers     gstack
 | 15 | 衡量与迭代 | 如何判断流程是否有效，如何持续改进 |
 
 本篇的贡献是建立了参照系和识别了关键张力。后续笔记将在这些张力的框架下，逐个节点深入讨论"什么可能是好的实践方向"。
+
+---
+
+点击下方"**阅读原文**"进入我的演示网站。

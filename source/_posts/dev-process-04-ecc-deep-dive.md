@@ -17,6 +17,8 @@ lang: zh-CN
 
 ---
 
+![AI研发流程深度解析（四）：ECC深度拆解——Agent素材大全](/images/dev-process/dev-process-04-ecc-deep-dive.png)
+
 ## 1. 架构拆解
 
 ### 1.1素材分类体系
@@ -600,3 +602,7 @@ Continuous Learning v2的设计很精巧，但：
 | 18 | origin字段区分ECC/community | 素材来源可追溯 | 无来源标记时社区贡献质量不可控 |
 | 19 | Rules按语言组织（common/typescript/python/golang/...） | 选择性安装，只加载相关语言的规则 | 跨语言项目需要安装多个rules目录 |
 | 20 | Observer loop prevention（5-layer guard） | orchestrator启动的subagent不应再触发orchestrator | 无guard时编排层级无限递归 |
+
+---
+
+点击下方"**阅读原文**"进入我的演示网站。
