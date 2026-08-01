@@ -169,23 +169,43 @@ gstack的Archive是最重的——21步ship流程 + retro + learn + document-rel
 
 - **`/ship`——非交互式全自动**："这是一个非交互式、完全自动化的工作流。不要在任何步骤请求确认。用户说了 /ship就意味着执行。"
 - **21步ship流程**：
-  1. Pre-flight（检查branch、diff、review readiness）
-  2. Distribution Pipeline Check（检查是否有发布管道）
-  3. Merge base branch（BEFORE tests）
-  4-6. Test suites + eval suites
-  7. Test coverage audit
-  8. Plan completion audit + scope drift
-  9. Pre-landing review + specialist dispatch
-  10. Greptile review comments
-  11. Adversarial review + learnings capture
-  12. Version bump（auto-decide）
-  13. CHANGELOG
-  14. TODOS.md update
-  15-16. WIP commit filtering
-  17. Push
-  18-19. PR/MR creation
-  20. Persist ship metrics
-  21. Plan-tune discoverability nudge
+
+  **阶段一：Pre-flight准备（Step 1-3）**
+
+  - **Step 1. Pre-flight（检查branch、diff、review readiness）**：确认当前所在branch（拒绝直接在main/master上ship）、检查是否有未commit的变更、评估review readiness——是否所有required review已完成。展示Review Readiness Dashboard，标注各review状态的staleness。
+  - **Step 2. Distribution Pipeline Check（检查是否有发布管道）**：检测项目是否存在CI/CD配置（GitHub Actions、GitLab CI等）。如果有，验证管道是否能正常触发；如果没有，标记为"无发布管道"并继续——ship不依赖CI但会提示用户。
+  - **Step 3. Merge base branch（BEFORE tests）**：在运行测试**之前**合并base branch的最新代码。关键顺序——先合并base再测试，而非先测试再合并。如果先测试再合并base，base中的新变更可能破坏当前分支的代码，但测试结果已经过时了。遇到merge conflicts则触发Stop条件。
+
+  **阶段二：测试验证（Step 4-7）**
+
+  - **Step 4-6. Test suites + eval suites**：运行三套测试——Step 4是unit tests（单元测试），Step 5是integration tests（集成测试），Step 6是eval suites（评估套件，针对AI应用的quality benchmark）。三套独立运行，任一失败触发Stop。eval suites是gstack的特色——不只测代码正确性，还测AI输出质量。
+  - **Step 7. Test coverage audit**：审计测试覆盖率。检查是否有新增代码未被测试覆盖，覆盖率低于阈值触发Stop。不只是看总体覆盖率数字，而是逐文件检查——一个总体80%的项目可能有某个关键模块只有20%覆盖。
+
+  **阶段三：审查与质量（Step 8-11）**
+
+  - **Step 8. Plan completion audit + scope drift**：对照plan检查每个task是否完成，检测scope drift——是否实现了plan中没有的功能（gold plating），或plan中的功能未实现。Plan items NOT DONE触发Stop。
+  - **Step 9. Pre-landing review + specialist dispatch**：在代码落地前进行最终审查。根据变更类型dispatch specialist reviewer——security变更触发Security Officer、UI变更触发Senior Designer、性能敏感变更触发Staff Engineer。每个specialist独立产出review。
+  - **Step 10. Greptile review comments**：调用Greptile（AI代码审查工具）对diff进行自动化审查，收集review comments。Greptile的审查作为人类review的补充——它能快速发现common patterns和potential issues。
+  - **Step 11. Adversarial review + learnings capture**：对抗性审查——故意寻找代码中的弱点、边界条件、failure modes。审查中发现的learnings被capture到 `/learn` 记忆系统，跨session积累——"learnings compound across sessions"。
+
+  **阶段四：版本与文档（Step 12-14）**
+
+  - **Step 12. Version bump（auto-decide）**：根据变更内容自动决定版本号bump级别——PATCH（bug fix）、MINOR（向后兼容的新功能）、MAJOR（breaking change）。MINOR/MAJOR bump触发Stop条件，需要用户确认。判断依据是conventional commits和scope drift分析。
+  - **Step 13. CHANGELOG**：根据version bump和diff自动生成CHANGELOG条目。按Keep a Changelog格式组织——Added、Changed、Deprecated、Removed、Fixed、Security。从commit history和plan items提取内容，而非让用户手写。
+  - **Step 14. TODOS.md update**：检查TODOS.md是否存在且格式规范。如果不存在或混乱，提供创建/重组选项。从plan中未完成的items、review中发现的follow-up items、scope drift中识别的future work更新TODOS.md。
+
+  **阶段五：Commit整理与推送（Step 15-17）**
+
+  - **Step 15. WIP commit filtering**：过滤压缩WIP commit——保留非WIP commit，保持bisect干净。每个commit应代表一个逻辑变更（不是单个文件，而是一个逻辑单元）。Commit顺序：Infrastructure → Models & services → Controllers & views → VERSION + CHANGELOG + TODOS.md。**Anti-footgun rule**："永远不要在有非WIP commit时盲目 `git reset --soft`——它会uncommit真实已落地工作，并将push变成non-fast-forward。"
+  - **Step 16. Verification Gate**：Iron Law——"NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE"。如果Steps 4-6后代码有变更（如Step 12-14的version/changelog修改），必须重新运行测试。"声称工作完成但没有验证是不诚实，不是效率。"
+  - **Step 17. Push**：推送到远程。Credential pre-push guard——可选的pre-push hook阻止包含API keys、tokens、private keys的push。Push是幂等的——已push则跳过。
+
+  **阶段六：PR与收尾（Step 18-21）**
+
+  - **Step 18. PR/MR creation**：创建Pull Request或Merge Request。PR body自动生成——包含plan summary、CHANGELOG摘要、review results、test results。PR已存在则更新body而非重复创建。
+  - **Step 19. PR/MR metadata**：设置PR metadata——labels（根据变更类型自动打标签：bug、feature、breaking-change等）、reviewers（根据Step 9的specialist dispatch自动分配）、milestone（根据version bump关联）。
+  - **Step 20. Persist ship metrics**：持久化ship过程的度量数据——commit数、test通过率、review发现数、coverage变化、scope drift项数、ship耗时。这些metrics被 `/retro` 用于趋势追踪。
+  - **Step 21. Plan-tune discoverability nudge**：基于本次ship的经验，提示用户是否需要调整plan模板或skill配置——"本次ship中scope drift检测到3项额外功能，是否需要在plan模板中增加scope边界检查？" 这是流程自我演化的机制。
 - **Review Readiness Dashboard**：ship前显示所有审查状态——Eng Review是required（可全局禁用），其他informational。Staleness detection比较审查时commit与当前HEAD——"Note: {skill} review from {date} may be stale — {N} commits since review"
 - **WIP commit过滤**（Step 15.0）：`/ship` 过滤压缩WIP commit——保留非WIP commit，保持bisect干净。**Anti-footgun rules**："永远不要在有非WIP commit时盲目 `git reset --soft`。Codex将此标记为破坏性操作——它会uncommit真实已落地工作，并将push步骤变成对已经push过的人来说的non-fast-forward push。"
 - **Bisectable commits**（Step 15.1）：每个commit代表一个逻辑变更——"每个commit应该代表一个连贯的变更——不是一个文件，而是一个逻辑单元"。Commit顺序：Infrastructure → Models & services → Controllers & views → VERSION + CHANGELOG + TODOS.md
